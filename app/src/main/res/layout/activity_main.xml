@@ -31,7 +31,51 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_height="0dp" />
 
+    <RadioGroup
+        android:id="@+id/rb"
+        app:layout_constraintTop_toBottomOf="@id/disable_snack"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rb_simple"
+            android:checked="true"
+            android:text="Simple"/>
+
+        <RadioButton
+            android:id="@+id/rb_custom"
+            android:text="Custom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RadioGroup>
+    <Button
+        android:id="@+id/createToast"
+        app:layout_constraintTop_toBottomOf="@+id/disable_snack"
+        app:layout_constraintLeft_toRightOf="@+id/rb"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Toast" />
+
+    <Button
+        android:id="@+id/dateTimeBtn"
+        android:text="Date/Time"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="selectDateTime"/>
+    <TextView
+        android:id="@+id/datetime"
+        app:layout_constraintTop_toBottomOf="@id/rb"
+        android:layout_width="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@id/dateTimeBtn"
+        android:layout_height="wrap_content" />
 
 
 
