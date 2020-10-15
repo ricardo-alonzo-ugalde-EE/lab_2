@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
      * to show a date picker dialog
      * Notice we use our activity as listener here since its an onDateSetListener
      * */
-    public void SelectDateTime()
+    public void selectDateTime(View view)
     {
         Calendar calendar = Calendar.getInstance();
         int yy = calendar.get(Calendar.YEAR);
@@ -140,16 +140,35 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         int dd = calendar.get(Calendar.DAY_OF_MONTH);
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,this,yy,mm,dd);
         datePickerDialog.show();
-
     }
 
     @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth)
+    public void onDateSet(DatePicker view, final int year, final int month, final int dayOfMonth)
     {
-        Calendar calendar=Calendar.getInstance();
-        int h=calendar.get(Calendar.HOUR_OF_DAY);
-        int m=calendar.get(Calendar.MINUTE);
-        final TextView textViewDateTime=findViewById(R.id.datetime);
-        
+        Calendar calendar = Calendar.getInstance();
+        int h = calendar.get(Calendar.HOUR_OF_DAY);
+        int m = calendar.get(Calendar.MINUTE);
+        final TextView textViewDateTime = findViewById(R.id.datetime);
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                final String oldValue = textViewDateTime.getText().toString();
+                textViewDateTime.setText(String.valueOf(month) + "/" + String.valueOf(dayOfMonth) + "/" + String.valueOf(year) +
+                        " " + String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
+                Snackbar snackbar = Snackbar.make(textViewDateTime, "Date and Time Selected", Snackbar.LENGTH_LONG)
+                        .setAction("UNDO", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                textViewDateTime.setText(oldValue);
+                                Toast.makeText(MainActivity.this, "Done!",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                snackbar.show();
+            }
+        }, h, m, false);
+        timePickerDialog.show();
     }
+
+
 }
